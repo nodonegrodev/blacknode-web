@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlackNode — Soluciones digitales a medida</title>
+<meta name="description" content="Sistemas, presencia digital y análisis de datos para tu negocio. Hechos a la medida de cómo trabajas, con comunicación directa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --fondo:#121213; --superficie:#1C1C1E; --elevada:#2A2A2D; --linea:#38383C;
+    --texto:#FEFEFD; --texto2:#A6A6AB; --apagado:#6E6E74;
+    --acento:#F15B21; --acento-hover:#FF7043;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--fondo); color:var(--texto);
+    font-family:'IBM Plex Sans',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:-0.02em;line-height:1.06}
+  .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.2em;font-size:.72rem;color:var(--acento)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 6vw}
+  .cta{
+    display:inline-flex;align-items:center;gap:.6rem;
+    background:var(--acento);color:#1A1516;font-weight:600;font-size:.95rem;
+    padding:.85rem 1.5rem;border-radius:10px;text-decoration:none;
+    transition:background .15s,transform .1s;
+  }
+  .cta:hover{background:var(--acento-hover)}
+  .cta.ghost{background:transparent;color:var(--texto);border:1px solid var(--linea)}
+  .cta.ghost:hover{border-color:var(--acento);color:var(--acento)}
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;height:60px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 6vw;background:rgba(18,18,19,.72);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--linea);
+  }
+  .brand{font-family:'Archivo',sans-serif;font-weight:900;font-size:1.15rem;letter-spacing:-.03em;text-decoration:none}
+  .brand .b{color:var(--texto)} .brand .n{color:var(--acento)}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;width:100%;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:2.2rem;padding:96px 6vw 9vh;
+    background:radial-gradient(ellipse at center,#111112 0%,#050506 72%);overflow:hidden;perspective:1200px;
+  }
+  .glow{position:absolute;width:58vmin;height:58vmin;border-radius:50%;
+    background:radial-gradient(circle,rgba(241,91,33,.5) 0%,rgba(241,91,33,0) 70%);
+    filter:blur(60px);opacity:0;pointer-events:none;will-change:opacity,transform}
+  .logo-stage{position:relative;height:min(40vh,320px);aspect-ratio:512/886;transform-style:preserve-3d;
+    will-change:transform,filter,opacity;filter:drop-shadow(0 24px 60px rgba(241,91,33,.3))}
+  .slice{position:absolute;inset:0;background-image:url('assets/logo.png');background-size:contain;
+    background-position:center;background-repeat:no-repeat;will-change:transform,opacity,filter}
+  .slice:nth-child(1){clip-path:inset(0 0 83.33% 0)}
+  .slice:nth-child(2){clip-path:inset(16.66% 0 66.66% 0)}
+  .slice:nth-child(3){clip-path:inset(33.33% 0 50% 0)}
+  .slice:nth-child(4){clip-path:inset(50% 0 33.33% 0)}
+  .slice:nth-child(5){clip-path:inset(66.66% 0 16.66% 0)}
+  .slice:nth-child(6){clip-path:inset(83.33% 0 0 0)}
+  .hero-copy{position:static;text-align:center;max-width:760px;opacity:0}
+  .hero-copy h1{font-size:clamp(1.5rem,3.4vw,2.5rem);max-width:20ch;margin:0 auto 1rem}
+  .hero-copy p{color:var(--texto2);max-width:52ch;margin:0 auto 1.8rem;font-size:clamp(.95rem,1.6vw,1.08rem)}
+  .scroll-hint{position:absolute;bottom:3vh;left:50%;transform:translateX(-50%);font-size:.68rem;
+    letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.04;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  /* ---------- SECCIONES ---------- */
+  section.block{position:relative;padding:12vh 0}
+  .block::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:1px;height:9vh;background:linear-gradient(to bottom,transparent,var(--acento))}
+  .eyebrow{margin-bottom:1.1rem}
+  .block h2{font-size:clamp(1.7rem,3.6vw,2.6rem);margin-bottom:1rem;max-width:20ch}
+  .block .lead{color:var(--texto2);max-width:56ch;font-size:1.02rem}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:3rem}
+  .card{padding:2.2rem 1.8rem;border:1px solid var(--linea);border-radius:16px;background:var(--superficie);
+    opacity:0;transform:translateY(30px);transition:border-color .35s}
+  .card:hover{border-color:rgba(241,91,33,.5)}
+  .card .num{font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.25em;color:var(--acento);margin-bottom:1.3rem}
+  .card h3{font-size:1.25rem;margin-bottom:.7rem}
+  .card p{color:var(--texto2);font-size:.95rem;line-height:1.6}
+
+  /* Sellos (por qué) */
+  .sellos{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;margin-top:3rem}
+  .sello h3{font-size:1.3rem;margin-bottom:.7rem;color:var(--texto)}
+  .sello h3::before{content:"";display:block;width:32px;height:3px;background:var(--acento);margin-bottom:1rem;border-radius:2px}
+  .sello p{color:var(--texto2);line-height:1.65}
+
+  /* Demo */
+  .demo{border:1px solid var(--linea);border-radius:18px;padding:3rem;background:
+    linear-gradient(180deg,rgba(241,91,33,.06),transparent 60%);margin-top:2.5rem}
+  .demo p{color:var(--texto2);font-size:1.05rem;line-height:1.7;max-width:62ch}
+  .demo .ph{color:var(--acento);font-family:'IBM Plex Mono',monospace;font-size:.85rem}
+
+  /* Contacto */
+  .contacto{text-align:center;padding:16vh 0 12vh}
+  .contacto h2{max-width:none;margin:0 auto 1.2rem}
+  .contacto p{color:var(--texto2);max-width:46ch;margin:0 auto 2.2rem;font-size:1.08rem}
+
+  footer{border-top:1px solid var(--linea);padding:2.5rem 6vw;display:flex;flex-wrap:wrap;gap:1rem;
+    justify-content:space-between;align-items:center;color:var(--apagado);font-size:.85rem}
+  footer .mono{color:var(--apagado)}
+
+  @media (prefers-reduced-motion:reduce){.card{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a class="brand" href="#top"><span class="b">BLACK</span><span class="n">NODE</span></a>
+    <a class="cta ghost" data-wa href="#">Conversemos</a>
+  </nav>
+
+  <!-- ============ 1. HERO / PORTADA ============ -->
+  <section class="hero" id="top">
+    <div class="glow"></div>
+    <div class="logo-stage" id="logoStage">
+      <div class="slice"></div><div class="slice"></div><div class="slice"></div>
+      <div class="slice"></div><div class="slice"></div><div class="slice"></div>
+    </div>
+    <div class="hero-copy" id="heroCopy">
+      <h1>Tu negocio, ordenado y visible donde tus clientes te buscan.</h1>
+      <p>Sistemas, presencia digital y análisis de datos, hechos a la medida de cómo trabajas. Y siempre con alguien con quien hablar.</p>
+      <a class="cta" data-wa href="#">Conversemos por WhatsApp</a>
+    </div>
+    <div class="scroll-hint">Desplázate</div>
+  </section>
+
+  <!-- ============ 2. QUÉ HACEMOS ============ -->
+  <section class="block" id="que-hacemos">
+    <div class="wrap">
+      <div class="eyebrow mono">Qué hacemos</div>
+      <h2>Tres formas de acompañar a tu negocio.</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="num">01</div>
+          <h3>Marketing y publicidad</h3>
+          <p>Que te encuentren. Hacemos que tu negocio aparezca donde tus clientes lo buscan —sitio web, Google Maps y redes— coherente y al día, para que quien te busque llegue directo a ti.</p>
+        </div>
+        <div class="card">
+          <div class="num">02</div>
+          <h3>Desarrollo</h3>
+          <p>Software hecho a tu medida. Miramos cómo trabajas y construimos la herramienta que se ajusta a tu forma de operar. Y como es a medida, es un proceso: hablas directo con quien lo desarrolla y lo diseña, sin intermediarios, para resolver cada duda en el camino.</p>
+        </div>
+        <div class="card">
+          <div class="num">03</div>
+          <h3>Inteligencia de Datos</h3>
+          <p>Decisiones con tus números. Construimos la plataforma que captura y analiza tus datos, para que decidas con información real, no a ojo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. POR QUÉ BLACKNODE ============ -->
+  <section class="block" id="por-que">
+    <div class="wrap">
+      <div class="eyebrow mono">Por qué BlackNode</div>
+      <h2>Dos cosas que no se negocian.</h2>
+      <div class="sellos">
+        <div class="sello">
+          <h3>Tu información, bajo tu control</h3>
+          <p>Los datos de tus clientes quedan en una base propia y segura. Tu negocio no queda amarrado a plataformas ajenas que cambian sus reglas o te cobran por acceder a lo que ya es tuyo.</p>
+        </div>
+        <div class="sello">
+          <h3>Nos adaptamos a tu forma de trabajar</h3>
+          <p>Antes de construir, miramos cómo trabajas hoy y qué necesitas resolver. La herramienta calza con tu operación — no al revés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. ESTO ES LO QUE HACEMOS ============ -->
+  <section class="block" id="trabajo">
+    <div class="wrap">
+      <div class="eyebrow mono">Esto es lo que hacemos</div>
+      <h2>Lo que decimos, lo mostramos.</h2>
+      <div class="demo">
+        <p>Operación y presencia digital, bajo control. Así implementamos <span class="ph">[el sistema de reservas y la nueva web]</span> en <span class="ph">[esta clínica dental en Viña]</span>: la gestión administrativa bajó a la mitad y las consultas por WhatsApp se duplicaron.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. CONTACTO ============ -->
+  <section class="contacto">
+    <div class="wrap">
+      <div class="eyebrow mono">Contacto</div>
+      <h2>Cuéntanos qué parte de tu negocio te quita más tiempo hoy.</h2>
+      <p>Conversamos, sin compromiso, y vemos cómo resolverlo.</p>
+      <a class="cta" data-wa href="#">Escríbenos por WhatsApp</a>
+    </div>
+  </section>
+
+  <footer>
+    <a class="brand" href="#top"><span class="b">BLACK</span><span class="n">NODE</span></a>
+    <span class="mono">Valparaíso · Chile</span>
+  </footer>
+
+  <div class="grain"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script>
+    // --- Número de WhatsApp (EDITAR) ---
+    const WA = "56000000000";
+    const WA_URL = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Hola BlackNode, quiero conversar sobre mi negocio.");
+    document.querySelectorAll("[data-wa]").forEach(a => a.href = WA_URL);
+
+    // --- Scroll suave ---
+    const lenis = new Lenis({ duration:1.1, smoothWheel:true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+    gsap.registerPlugin(ScrollTrigger);
+
+    const slices = gsap.utils.toArray('.slice');
+
+    gsap.set('.logo-stage', {scale:.06, opacity:0, rotateY:-50, rotateX:30, filter:'blur(30px) brightness(.2)'});
+    gsap.set('.glow', {opacity:0, scale:.4});
+    gsap.set('.hero-copy', {opacity:0, y:16});
+
+    // Llegada — AL CARGAR (sin scroll): el logo aparece solo
+    gsap.timeline({ delay:.15 })
+      .to('.logo-stage', { scale:1, opacity:1, rotateY:0, rotateX:0, filter:'blur(0) brightness(1)', duration:1.2, ease:'power2.out' })
+      .to('.glow', { opacity:1, scale:1.2, duration:.6, ease:'sine.inOut' }, '-=.35')
+      .to('.hero-copy', { opacity:1, y:0, duration:.6, ease:'power2.out' }, '-=.3');
+
+    // Desarme — AL HACER SCROLL (corto, ya no secuestra 3 pantallas)
+    const tl = gsap.timeline({
+      scrollTrigger:{ trigger:'#top', start:'top top', end:'+=60%', scrub:1, pin:true, anticipatePin:1 }
+    });
+    tl.to('.hero-copy', { opacity:0, duration:.4 })
+      .to(slices, { x:i=>(i%2?1:-1)*(60+i*20), y:i=>(i-2.5)*(80+i*12), rotation:i=>(i-2.5)*(8+i),
+        filter:'blur(10px)', opacity:0, duration:.9, stagger:.05, ease:'power2.in' }, '<')
+      .to('.logo-stage', { scale:1.3, opacity:0, duration:.9, ease:'power2.in' }, '<')
+      .to('.glow', { opacity:0, scale:2.4, duration:.9, ease:'power2.in' }, '<');
+
+    // Tarjetas y sellos al entrar
+    gsap.utils.toArray('.card, .sello').forEach((el,i)=>{
+      gsap.to(el, {opacity:1, y:0, duration:.7, ease:'power3.out',
+        scrollTrigger:{ trigger:el, start:'top 88%' }});
+    });
+  </script>
+</body>
+</html>
