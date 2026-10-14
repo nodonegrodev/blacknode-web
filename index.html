@@ -900,30 +900,53 @@
     gsap.set('.hero-copy', { opacity: 0, y: 24 });
 
     // Llegada — AL CARGAR (sin scroll): el logo aparece solo
-    gsap.timeline({ delay: .15 })
+    const arrivalTl = gsap.timeline({ delay: .15 })
       .to('.logo-stage', { scale: 1, opacity: 1, rotateY: 0, rotateX: 0, filter: 'blur(0) brightness(1)', duration: 1.2, ease: 'power2.out' })
       .to('.glow', { opacity: 1, scale: 1.2, duration: .65, ease: 'sine.inOut' }, '-=.35')
       .to('.hero-copy', { opacity: 1, y: 0, duration: .65, ease: 'power2.out' }, '-=.35');
 
-    // Desarme — AL HACER SCROLL (corto, no secuestra pantallas)
+    // Desarme — en flujo continuo con el scroll natural (sin pin ni congelamientos)
     const tl = gsap.timeline({
-      scrollTrigger: { trigger: '#top', start: 'top top', end: '+=60%', scrub: 1, pin: true, anticipatePin: 1 }
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.6
+      }
     });
-    tl.to('.hero-copy', { opacity: 0, y: -20, duration: .4 })
-      .to(slices, {
-        x: i => (i % 2 ? 1 : -1) * (60 + i * 20),
-        y: i => (i - 2.5) * (80 + i * 12),
-        rotation: i => (i - 2.5) * (8 + i),
-        filter: 'blur(10px)',
-        opacity: 0,
-        duration: .9,
-        stagger: .05,
-        ease: 'power2.in'
-      }, '<')
-      .to('.logo-stage', { scale: 1.3, opacity: 0, duration: .9, ease: 'power2.in' }, '<')
-      .to('.glow', { opacity: 0, scale: 2.4, duration: .9, ease: 'power2.in' }, '<');
 
-      // Espinas de separación (crecimiento vertical al aparecer)
+    tl.to('.hero-copy', {
+      opacity: 0,
+      y: -40,
+      duration: 0.3,
+      ease: 'power1.out'
+    }, 0)
+    .to(slices, {
+      x: i => (i % 2 ? 1 : -1) * (30 + i * 10),
+      y: i => (i - 2.5) * (40 + i * 6),
+      rotation: i => (i - 2.5) * (4 + i * 0.5),
+      filter: 'blur(6px)',
+      opacity: 0,
+      duration: 0.7,
+      stagger: 0.02,
+      ease: 'power1.inOut'
+    }, 0)
+    .to('.logo-stage', {
+      scale: 1.06,
+      opacity: 0,
+      duration: 1.0,
+      ease: 'power1.inOut'
+    }, 0)
+    .to('.glow', {
+      opacity: 0,
+      duration: 0.7,
+      ease: 'power1.out'
+    }, 0);
+
+    // Exponer lenis para control de scroll
+    window.lenis = lenis;
+
+    // Espinas de separación (crecimiento vertical al aparecer)
       gsap.utils.toArray('.spine-mark').forEach(spine => {
         gsap.fromTo(spine,
           { scaleY: 0, opacity: 0 },
