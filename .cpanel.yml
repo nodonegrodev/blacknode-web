@@ -2,5 +2,14 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/blakzdxs/public_html/
-    - /bin/cp -R assets $DEPLOYPATH
     - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp .htaccess $DEPLOYPATH
+    - /bin/cp robots.txt $DEPLOYPATH
+    - /bin/cp sitemap.xml $DEPLOYPATH
+    - /bin/cp favicon.svg $DEPLOYPATH
+    - /bin/cp apple-touch-icon.png $DEPLOYPATH
+    - /bin/cp og-blaknode.png $DEPLOYPATH
+    - /bin/cp barlow-condensed-800.woff2 $DEPLOYPATH
+    - /bin/cp inter.woff2 $DEPLOYPATH
+    - /bin/cp jetbrains-mono-variable.woff2 $DEPLOYPATH
+    - /bin/cp logo-blaknode-inverso.svg $DEPLOYPATH
